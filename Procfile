@@ -1,1 +1,1 @@
-worker: python manager.py runserver -p $PORT
+web: python manager.py runserver -p $PORT
