@@ -1,1 +1,1 @@
-web: python manager.py runserver -p $PORT
+web: gunicorn fastmonkeys:app
