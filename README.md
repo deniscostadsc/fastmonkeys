@@ -17,11 +17,9 @@ TODO
 
 [ ] Add best friend to a monkey (Each monkey can only have one best friend)
 
-[ ] List monkeys
+[ ] List monkeys (Show monkey names, name of the best friend (if any) and number of friends)
 
-* Show monkey names, name of the best friend (if any) and number of friends
+[ ] List of monkeys should be sortable by name, name of the best friend and number of friends
 
-* Sortable by name, name of the best friend and number of friends
-
-* Pagination
+[ ] List of monkeys should have pagination
 
