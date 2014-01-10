@@ -19,9 +19,9 @@ TODO
 
 [ ] List monkeys
 
-    * Show monkey names, name of the best friend (if any) and number of friends
+* Show monkey names, name of the best friend (if any) and number of friends
 
-    * Sortable by name, name of the best friend and number of friends
+* Sortable by name, name of the best friend and number of friends
 
-    * Pagination
+* Pagination
 
