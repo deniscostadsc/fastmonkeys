@@ -8,7 +8,7 @@ from werkzeug import generate_password_hash, check_password_hash
 
 from fastmonkeys.database import Base
 
-if sys.versio_info[0] == 3:
+if sys.version_info[0] == 3:
     unicode = str
 
 
