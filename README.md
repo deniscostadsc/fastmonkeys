@@ -1,6 +1,8 @@
 fastmonkeys
 ===========
 
+[![Build Status](https://travis-ci.org/deniscostadsc/fastmonkeys.png?branch=master)](https://travis-ci.org/deniscostadsc/fastmonkeys)
+
 TODO
 
 [ ] Add monkey
