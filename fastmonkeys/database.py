@@ -18,5 +18,8 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    from fastmonkeys.models import *
+    import fastmonkeys.models
     Base.metadata.create_all(bind=engine)
+    # it's a hack to stop the warning about unused import
+    # I have to import this way to create the database 8(
+    dir(fastmonkeys.models)
