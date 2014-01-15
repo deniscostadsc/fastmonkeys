@@ -1,3 +1,5 @@
+import sys
+
 from string import digits, letters
 from random import choice
 
@@ -5,6 +7,9 @@ from sqlalchemy import Column, Integer, String, Date
 from werkzeug import generate_password_hash, check_password_hash
 
 from fastmonkeys.database import Base
+
+if sys.versio_info[0] == 3:
+    unicode = str
 
 
 class Monkey(Base):
