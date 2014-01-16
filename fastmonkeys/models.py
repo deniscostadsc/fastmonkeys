@@ -1,6 +1,5 @@
 import sys
 
-from string import digits, letters
 from random import choice
 
 from sqlalchemy import Column, Integer, String, Date
@@ -10,6 +9,9 @@ from fastmonkeys.database import Base
 
 if sys.version_info[0] == 3:
     unicode = str
+    from string import digits, ascii_letters as letters
+else:
+    from string import digits, letters
 
 
 class Monkey(Base):
