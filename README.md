@@ -1,7 +1,7 @@
 fastmonkeys
 ===========
 
-[![Build Status](https://travis-ci.org/deniscostadsc/fastmonkeys.png?branch=master)](https://travis-ci.org/deniscostadsc/fastmonkeys)
+[![Build Status](https://travis-ci.org/deniscostadsc/fastmonkeys.png?branch=master)](https://travis-ci.org/deniscostadsc/fastmonkeys) [![Coverage Status](https://coveralls.io/repos/deniscostadsc/fastmonkeys/badge.png)](https://coveralls.io/r/deniscostadsc/fastmonkeys)
 
 TODO
 
