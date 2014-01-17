@@ -50,4 +50,10 @@ class Monkey(Base):
         return unicode(self.id)
 
     def __repr__(self):
-        return '%s(%r)' % (self.__class__, self.__dict__)
+        return '%s(name="%s", email="%s", date_of_birth="%s", password="%s")' % (
+            self.__class__.__name__,
+            self.__dict__['name'],
+            self.__dict__['email'],
+            self.__dict__['date_of_birth'],
+            self.__dict__['password']
+        )
