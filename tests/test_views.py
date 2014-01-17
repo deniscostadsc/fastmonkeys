@@ -1,6 +1,13 @@
 import pytest
 
 from fastmonkeys import app
+from fastmonkeys.database import Base, engine, init_db
+
+
+@pytest.fixture(scope="function")
+def start_database():
+    Base.metadata.drop_all(bind=engine)
+    init_db()
 
 
 @pytest.fixture(scope="module")
@@ -18,7 +25,7 @@ def test_register_status_code(client):
     assert response.status_code == 200
 
 
-def test_register(client):
+def test_register(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
