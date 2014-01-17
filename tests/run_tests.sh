@@ -12,7 +12,7 @@ find . -name '*.pyc' -delete
 rm -rf htmlcov
 
 if [ "$1" == "--html" ]; then
-    py.test --cov fastmonkeys tests/ --cov-report=html
+    py.test --cov fastmonkeys tests/ --cov-report html
 else
-    py.test --cov fastmonkeys tests/
+    py.test --cov fastmonkeys tests/ --cov-report term-missing
 fi
