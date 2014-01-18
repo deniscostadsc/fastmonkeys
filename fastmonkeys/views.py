@@ -14,7 +14,7 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
-    if form.validate():
+    if request.method == 'POST' and form.validate():
         monkey = Monkey(
             form.name.data,
             form.email.data,
