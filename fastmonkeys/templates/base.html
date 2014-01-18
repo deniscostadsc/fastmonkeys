@@ -1,8 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+        <title>Monkey{% block title %}{% endblock title %}</title>
+
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <style>
+            body {
+                background-color: #ECECEC;
+                padding-top: 20px;
+            }
+
+            .register {
+                width: 350px;
+                text-align: center;
+            }
+
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
     </head>
     <body>
-        {% block content %}{% endblock content %}
+        <div class="container">
+            <img src="/static/img/brand.png" class="center">
+            {% block content %}{% endblock content %}
+        </div>
     </body>
 </html>

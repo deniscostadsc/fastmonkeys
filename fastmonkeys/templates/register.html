@@ -1,23 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="POST">
-        <label for="name">Name</label>
-        {{ form.name() }}
-        {% for error in form.errors.name %}<span class="help-inline">[{{ error }}]</span><br>{% endfor %}
+    <form method="POST" class="center register form-horizontal" role="form">
+        <h2 class="center">Sign in</h2>
 
-        <label for="email">E-mail</label>
-        {{ form.email() }}
-        {% for error in form.errors.email %}<span class="help-inline">[{{ error }}]</span><br>{% endfor %}
+        <div class="form-group">
+            {{ form.name(placeholder="Name", class="form-control", required="") }}
+            {% for error in form.errors.name %}
+                <span class="help-inline">{{ error }}</span><br>
+            {% endfor %}
+        </div>
 
-        <label for="date_of_birth">Date of Birth</label>
-        {{ form.date_of_birth() }}
-        {% for error in form.errors.date_of_birth %}<span class="help-inline">[{{ error }}]</span><br>{% endfor %}
+        <div class="form-group">
+            {{ form.email(placeholder="E-mail", class="form-control", required="") }}
+            {% for error in form.errors.email %}
+                <span class="help-inline">{{ error }}</span><br>
+            {% endfor %}
+        </div>
 
-        <label for="passsword">Password</label>
-        {{ form.password() }}
-        {% for error in form.errors.password %}<span class="help-inline">[{{ error }}]</span><br>{% endfor %}
+        <div class="form-group">
+            {{ form.date_of_birth(placeholder="Date of birth", class="form-control", required="") }}
+            {% for error in form.errors.date_of_birth %}<span class="help-inline">{{ error }}</span><br>{% endfor %}
+        </div>
 
-        <input type="submit">
+        <div class="form-group">
+            {{ form.password(placeholder="Password", class="form-control", required="") }}
+            {% for error in form.errors.password %}<span class="help-inline">{{ error }}</span><br>{% endfor %}
+        </div>
+
+        <input type="submit" value="Become a monkey" class="center btn btn-lg btn-primary">
     </form>
 {% endblock content %}
