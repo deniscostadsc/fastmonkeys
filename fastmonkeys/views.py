@@ -53,6 +53,35 @@ def profile(monkey_id):
     return render_template('profile.html', monkey=monkey)
 
 
+@app.route('/monkeys/')
+@login_required
+def list():
+    monkeys = Monkey.query.all()
+    return render_template('list.html', monkeys=monkeys)
+
+
+@app.route('/friend/<monkey_id>/')
+@login_required
+def friend(monkey_id):
+    monkey = current_user
+    friend = Monkey.query.get(monkey_id)
+    monkey.friends.append(friend)
+    db_session.add(monkey)
+    db_session.commit()
+    return redirect(url_for('list'))
+
+
+@app.route('/unfriend/<monkey_id>/')
+@login_required
+def unfriend(monkey_id):
+    monkey = current_user
+    friend = Monkey.query.get(monkey_id)
+    monkey.friends.remove(friend)
+    db_session.add(monkey)
+    db_session.commit()
+    return redirect(url_for('list'))
+
+
 @app.route('/edit/', methods=['GET', 'POST'])
 @login_required
 def edit():

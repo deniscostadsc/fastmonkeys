@@ -2,7 +2,8 @@ import sys
 from random import choice
 from datetime import date
 
-from sqlalchemy import Column, Integer, String, Date
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Table
+from sqlalchemy.orm import relationship
 from werkzeug import generate_password_hash, check_password_hash
 
 from fastmonkeys.database import Base
@@ -19,6 +20,14 @@ def today():
     return date.today()
 
 
+friendship = Table(
+    'friendship',
+    Base.metadata,
+    Column('monkey_id', Integer, ForeignKey('monkey.id')),
+    Column('friend_id', Integer, ForeignKey('monkey.id')),
+)
+
+
 class Monkey(Base):
     __tablename__ = 'monkey'
     id = Column(Integer, primary_key=True)
@@ -27,6 +36,12 @@ class Monkey(Base):
     date_of_birth = Column(Date)
     password = Column(String(80))
     salt = Column(String(1))
+    friends = relationship(
+        'Monkey',
+        secondary=friendship,
+        primaryjoin=friendship.c.monkey_id == id,
+        secondaryjoin=friendship.c.friend_id == id,
+    )
 
     def __init__(self, name, email, date_of_birth, password):
         self.name = name

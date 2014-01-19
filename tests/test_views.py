@@ -251,3 +251,96 @@ def test_delete_monkey(client, start_database):
     response = client.get('/delete/')
     assert response.status_code == 302
     assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 0
+
+
+def test_list_monkeys(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+
+    response = client.get('/monkeys/')
+    assert response.status_code == 200
+    assert 'Lemmy Kilmister' in response.data
+
+
+def test_add_monkey_as_friend(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'name': 'Tom Araya',
+        'email': 'Tom@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+
+    response = client.get('/friend/2/')
+    assert response.status_code == 302
+
+    lemmy = Monkey.query.get(1)
+    assert len(lemmy.friends) == 1
+
+
+def test_unfriend(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'name': 'Tom Araya',
+        'email': 'Tom@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+
+    lemmy = Monkey.query.get(1)
+    assert len(lemmy.friends) == 0
+
+    response = client.get('/friend/2/')
+    assert response.status_code == 302
+    assert len(lemmy.friends) == 1
+
+    response = client.get('/unfriend/2/')
+    assert response.status_code == 302
+    assert len(lemmy.friends) == 0
