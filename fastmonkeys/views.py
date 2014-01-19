@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request
+from flask import abort, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required
 
 from fastmonkeys import app
@@ -40,3 +40,12 @@ def register():
         db_session.commit()
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+
+@app.route('/monkeys/<monkey_id>/')
+@login_required
+def profile(monkey_id):
+    monkey = Monkey.query.get(monkey_id)
+    if monkey is None:
+        abort(404)
+    return render_template('profile.html', monkey=monkey)

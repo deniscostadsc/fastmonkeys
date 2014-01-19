@@ -4,3 +4,4 @@ flake8==2.1.0
 pytest==2.5.1
 pytest-cov==1.6
 python-coveralls==2.4.2
+mock==1.0.1

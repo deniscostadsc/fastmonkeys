@@ -1,6 +1,6 @@
 import sys
-
 from random import choice
+from datetime import date
 
 from sqlalchemy import Column, Integer, String, Date
 from werkzeug import generate_password_hash, check_password_hash
@@ -12,6 +12,11 @@ if sys.version_info[0] == 3:
     from string import digits, ascii_letters as letters
 else:
     from string import digits, letters
+
+
+# this way I can mock today 8D
+def today():
+    return date.today()
 
 
 class Monkey(Base):
@@ -28,6 +33,10 @@ class Monkey(Base):
         self.email = email
         self.date_of_birth = date_of_birth
         self.set_password(password)
+
+    @property
+    def age(self):
+        return (today() - self.date_of_birth).days / 365
 
     def set_password(self, password):
         salt_characters = letters + digits

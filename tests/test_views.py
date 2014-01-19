@@ -88,3 +88,43 @@ def test_register(client, start_database):
 
     response = client.post('/register', data=data)
     assert response.status_code == 302
+
+
+def test_view_profile(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+    response = client.get('/monkeys/1/')
+    assert response.status_code == 200
+
+
+def test_fail_view_profile(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+    response = client.get('/monkeys/9876543210/')
+    assert response.status_code == 404

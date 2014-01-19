@@ -1,5 +1,6 @@
 from datetime import date
 
+import mock
 import pytest
 
 from fastmonkeys.models import Monkey
@@ -24,6 +25,27 @@ def test_hash_password(monkey):
 
 def test_check_password(monkey):
     assert monkey.check_password('123456')
+
+
+@mock.patch('fastmonkeys.models.today')
+def test_calculate_age_in_the_begining_of_the_year(today):
+    today.return_value = date(2014, 1, 1)
+    monkey = Monkey('Denis Costa', 'myemail@gmail.com', date(1987, 7, 17), '123456')
+    assert monkey.age == 26
+
+
+@mock.patch('fastmonkeys.models.today')
+def test_calculate_age_in_your_birthday(today):
+    today.return_value = date(2014, 7, 17)
+    monkey = Monkey('Denis Costa', 'myemail@gmail.com', date(1987, 7, 17), '123456')
+    assert monkey.age == 27
+
+
+@mock.patch('fastmonkeys.models.today')
+def test_calculate_age_in_the_end_of_the_year(today):
+    today.return_value = date(2014, 12, 31)
+    monkey = Monkey('Denis Costa', 'myemail@gmail.com', date(1987, 7, 17), '123456')
+    assert monkey.age == 27
 
 
 def test_is_authenticated(monkey):

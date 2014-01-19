@@ -7,7 +7,7 @@ TODO
 
 [X] Add monkey
 
-[ ] View monkey profile (The profile page should show the name, age and email of a monkey)
+[X] View monkey profile (The profile page should show the name, age and email of a monkey)
 
 [ ] Edit monkey
 
