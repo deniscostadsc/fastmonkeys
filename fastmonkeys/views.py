@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from flask import abort, render_template, redirect, url_for, request
-from flask_login import login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required
 
 from fastmonkeys import app
-from fastmonkeys.forms import RegisterForm, LoginForm
+from fastmonkeys.forms import RegisterForm, LoginForm, EditProfileForm
 from fastmonkeys.models import Monkey
 from fastmonkeys.database import db_session
 
@@ -49,3 +51,42 @@ def profile(monkey_id):
     if monkey is None:
         abort(404)
     return render_template('profile.html', monkey=monkey)
+
+
+@app.route('/edit/', methods=['GET', 'POST'])
+@login_required
+def edit():
+    monkey = current_user
+
+    if request.method == 'POST':
+
+        data = {}
+
+        if request.form.get('email') and request.form.get('email') != monkey.email:
+            data['email'] = request.form.get('email')
+
+        form = EditProfileForm(**data)
+
+        if form.validate():
+            if request.form.get('name'):
+                monkey.name = request.form.get('name')
+
+            if request.form.get('email') and request.form.get('email') != monkey.email:
+                monkey.email = request.form.get('email')
+
+            if request.form.get('date_of_birth'):
+                monkey.date_of_birth = datetime.strptime(request.form.get('date_of_birth'), '%m/%d/%Y').date()
+
+            if request.form.get('password'):
+                monkey.set_password(request.form.get('password'))
+
+            db_session.add(monkey)
+            db_session.commit()
+    else:
+        form = EditProfileForm(
+            name=monkey.name,
+            email=monkey.email,
+            date_of_birth=monkey.date_of_birth
+        )
+
+    return render_template('edit.html', form=form)

@@ -9,7 +9,7 @@ TODO
 
 [X] View monkey profile (The profile page should show the name, age and email of a monkey)
 
-[ ] Edit monkey
+[X] Edit monkey
 
 [ ] Remove monkey
 
