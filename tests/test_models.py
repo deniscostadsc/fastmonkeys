@@ -5,7 +5,7 @@ import pytest
 
 from fastmonkeys.models import Monkey
 from fastmonkeys.database import db_session, engine, init_db, Base
-from fastmonkeys import load_user
+from fastmonkeys import load_monkey
 
 
 @pytest.fixture(scope="module")
@@ -71,12 +71,12 @@ def test_repr(monkey):
     assert my_monkey.name == monkey.name
 
 
-def test_load_user(monkey):
+def test_load_monkey(monkey):
     db_session.add(monkey)
     db_session.commit()
-    assert isinstance(load_user(monkey.get_id()), Monkey)
-    assert load_user(monkey.get_id()).name == monkey.name
+    assert isinstance(load_monkey(monkey.get_id()), Monkey)
+    assert load_monkey(monkey.get_id()).name == monkey.name
 
 
-def test_fail_load_user(monkey, start_database):
-    assert load_user(u'1') is None
+def test_fail_load_monkey(monkey, start_database):
+    assert load_monkey(u'1') is None

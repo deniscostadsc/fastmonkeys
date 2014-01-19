@@ -17,5 +17,5 @@ login_manager.init_app(app)
 
 
 @login_manager.user_loader
-def load_user(user_id):
-    return Monkey.query.get(user_id)
+def load_monkey(monkey_id):
+    return Monkey.query.get(monkey_id)
