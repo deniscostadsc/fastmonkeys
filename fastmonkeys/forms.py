@@ -13,3 +13,8 @@ class RegisterForm(Form):
     def validate_email(self, field):
         if Monkey.query.filter(Monkey.email == self.email.data).count() != 0:
             raise ValidationError('This email is already registered!')
+
+
+class LoginForm(Form):
+    email = TextField(u'email', validators=[Required()])
+    password = PasswordField('password', validators=[Required()])

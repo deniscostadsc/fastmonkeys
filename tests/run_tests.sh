@@ -6,6 +6,9 @@ cd $(dirname $0) && cd ..
 
 flake8 . --ignore=F403 --max-line-length=119
 
+# fake secret key for tests
+export SECRET_KEY='123456'
+
 # clean up
 find . -name '.coverage' -delete
 find . -name '*.pyc' -delete
