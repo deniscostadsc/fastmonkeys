@@ -90,3 +90,13 @@ def edit():
         )
 
     return render_template('edit.html', form=form)
+
+
+@app.route('/delete/')
+@login_required
+def delete():
+    monkey = current_user
+    db_session.delete(monkey)
+    db_session.commit()
+    logout_user()
+    return redirect(url_for('login'))

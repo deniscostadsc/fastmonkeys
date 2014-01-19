@@ -11,7 +11,7 @@ TODO
 
 [X] Edit monkey
 
-[ ] Remove monkey
+[X] Remove monkey
 
 [ ] Friend monkeys (Each monkey can have multiple friends)
 

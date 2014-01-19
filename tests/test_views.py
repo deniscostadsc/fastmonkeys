@@ -2,6 +2,7 @@ import pytest
 
 from fastmonkeys import app
 from fastmonkeys.database import Base, engine, init_db
+from fastmonkeys.models import Monkey
 
 
 @pytest.fixture(scope="function")
@@ -93,8 +94,11 @@ def test_register(client, start_database):
         'password': '123456'
     }
 
+    assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 0
+
     response = client.post('/register', data=data)
     assert response.status_code == 302
+    assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 1
 
 
 def test_view_profile(client, start_database):
@@ -224,3 +228,26 @@ def test_edit_password_profile(client, start_database):
 
     assert 'Set-Cookie' in response.headers
     assert response.status_code == 302
+
+
+def test_delete_monkey(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+    assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 1
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+
+    response = client.get('/delete/')
+    assert response.status_code == 302
+    assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 0
