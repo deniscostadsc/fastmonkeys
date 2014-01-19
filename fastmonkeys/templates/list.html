@@ -1,48 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    N° of friends
-                </th>
-                <th>
-                    Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for monkey in monkeys %}
+    <div class="listing">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        {{ monkey.name }}
-                    </td>
-                    <td>
-                        {{ monkey.friends|length }}
-                    </td>
-                    <td>
-                        {% if current_user.id != monkey.id %}
-                            {% if monkey not in current_user.friends %}
-                                <a href="/friend/{{ monkey.id }}/" class="btn btn-primary">
-                                    add as <strong>friend</strong>
-                                </a>
-                            {% else %}
-                                <a href="/best-friend/{{ monkey.id }}/" class="btn btn-primary">
-                                    mark as your <strong>best friend</strong>
-                                </a>
-
-                                <a href="/unfriend/{{ monkey.id }}/" class="btn btn-primary btn-danger">
-                                    <strong>Unfriend</strong>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                    </td>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        N° of friends
+                    </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for monkey in monkeys %}
+                    <tr>
+                        <td>
+                            {{ monkey.name }}
+                        </td>
+                        <td>
+                            {{ monkey.friends|length }}
+                        </td>
+                        <td>
+                            {% if current_user.id != monkey.id %}
+                                {% if monkey not in current_user.friends %}
+                                    <a href="/friend/{{ monkey.id }}/" class="btn btn-primary">
+                                        add as <strong>friend</strong>
+                                    </a>
+                                {% else %}
+                                    <a href="/unfriend/{{ monkey.id }}/" class="btn btn-primary btn-danger">
+                                        <strong>Unfriend</strong>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}
