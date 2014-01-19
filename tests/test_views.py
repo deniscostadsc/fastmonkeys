@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 
 from fastmonkeys import app
@@ -272,7 +274,11 @@ def test_list_monkeys(client, start_database):
 
     response = client.get('/monkeys/')
     assert response.status_code == 200
-    assert 'Lemmy Kilmister' in response.data
+
+    if sys.version_info[0] == 3:
+        assert bytearray('Lemmy Kilmister', 'utf-8') in response.data
+    else:
+        assert 'Lemmy Kilmister' in response.data
 
 
 def test_add_monkey_as_friend(client, start_database):
