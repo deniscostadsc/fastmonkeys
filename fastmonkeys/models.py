@@ -36,7 +36,7 @@ class Monkey(Base):
 
     @property
     def age(self):
-        return (today() - self.date_of_birth).days / 365
+        return int((today() - self.date_of_birth).days / 365)
 
     def set_password(self, password):
         salt_characters = letters + digits
