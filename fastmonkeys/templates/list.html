@@ -1,8 +1,37 @@
 {% extends 'base.html' %}
 
+{% block css %}
+    <style>
+        .tablesorter-header {
+            background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
+            background-repeat: no-repeat;
+            background-position: center right;
+            padding: 4px 18px 4px 4px;
+            white-space: normal;
+            cursor: pointer;
+        }
+
+        .headerSortUp, .tablesorter-headerSortUp, .tablesorter-headerAsc {
+            background-color: #9fbfdf;
+            background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+        }
+
+        .headerSortDown, .tablesorter-headerSortDown, .tablesorter-headerDesc {
+            background-color: #8cb3d9;
+            background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+        }
+
+        thead .sorter-false {
+            background-image: none;
+            cursor: default;
+            padding: 4px;
+        }
+    </style>
+{% endblock css %}
+
 {% block content %}
     <div class="listing">
-        <table class="table">
+        <table class="table js-sort tablesorter">
             <thead>
                 <tr>
                     <th>
@@ -11,7 +40,7 @@
                     <th>
                         N° of friends
                     </th>
-                    <th>
+                    <th data-sorter="false">
                         Actions
                     </th>
                 </tr>
@@ -44,3 +73,17 @@
         </table>
     </div>
 {% endblock content %}
+
+
+{% block js %}
+    <script src="/static/js/jquery.tablesorter.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.tablesorter.widgets.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function (){
+            $('.js-sort').tablesorter({
+                widgets: ['zebra', 'columns'],
+                sortReset: true,
+            }); 
+        });
+    </script>
+{% endblock js %}

@@ -21,7 +21,7 @@ TODO
 
 [X] List monkeys (Show monkey names, name of the best friend (if any) and number of friends)
 
-[ ] List of monkeys should be sortable by name, name of the best friend and number of friends
+[X] List of monkeys should be sortable by name, name of the best friend and number of friends
 
 [ ] List of monkeys should have pagination
 
