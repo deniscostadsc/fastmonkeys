@@ -27,7 +27,7 @@ def test_login(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -59,7 +59,7 @@ def test_logout(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -92,7 +92,7 @@ def test_register(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -107,7 +107,7 @@ def test_view_profile(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -127,7 +127,7 @@ def test_fail_view_profile(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -147,7 +147,7 @@ def test_edit_profile_status_code(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -168,7 +168,7 @@ def test_edit_email_profile(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -184,7 +184,7 @@ def test_edit_email_profile(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy.kilmister@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': ''
     }
 
@@ -196,7 +196,7 @@ def test_edit_password_profile(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -212,7 +212,7 @@ def test_edit_password_profile(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456789'
     }
 
@@ -236,7 +236,7 @@ def test_delete_monkey(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -259,7 +259,7 @@ def test_list_monkeys(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -285,7 +285,7 @@ def test_fail_list_monkeys_bad_query_string(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -306,7 +306,7 @@ def test_list_monkeys_invalid_number(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -327,7 +327,7 @@ def test_add_monkey_as_friend(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -336,7 +336,7 @@ def test_add_monkey_as_friend(client, start_database):
     data = {
         'name': 'Tom Araya',
         'email': 'Tom@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -360,7 +360,7 @@ def test_unfriend(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
         'email': 'lemmy@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 
@@ -369,7 +369,7 @@ def test_unfriend(client, start_database):
     data = {
         'name': 'Tom Araya',
         'email': 'Tom@mail.com',
-        'date_of_birth': '09/12/1954',
+        'date_of_birth': '12/09/1954',
         'password': '123456'
     }
 

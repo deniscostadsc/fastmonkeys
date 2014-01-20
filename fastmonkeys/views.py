@@ -22,6 +22,11 @@ def _401(error):
     return render_template('401.html'), 401
 
 
+@app.errorhandler(500)
+def _500(error):
+    return render_template('401.html'), 500
+
+
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST' and 'email' in request.form:
