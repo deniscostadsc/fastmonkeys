@@ -1,7 +1,7 @@
 from datetime import datetime
 from math import ceil
 
-from flask import abort, render_template, redirect, url_for, request
+from flask import abort, flash, render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from fastmonkeys import app
@@ -30,6 +30,7 @@ def login():
             if monkey.check_password(request.form.get('password')):
                 login_user(monkey)
                 return redirect(url_for('register'))
+        flash('Invalid login/password!', category='error')
     form = LoginForm(request.form)
     return render_template('login.html', form=form)
 
