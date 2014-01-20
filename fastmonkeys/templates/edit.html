@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method="POST" class="center register form-horizontal" role="form">
-        <h1 class="center">Edit</h1>
 
+    <header class="navbar navbar-inverse bs-docs-nav">
+        <div class="navbar-header">
+            <a href="/monkeys/" class="navbar-brand">Monkeys</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/edit/">Edit your profile</a>
+                </li>
+                <li>
+                    <a href="/logout/">logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <form method="POST" class="center register form-horizontal" role="form">
         <div class="form-group">
             {{ form.name(placeholder="Name", class="form-control", required="") }}
             {% for error in form.errors.name %}

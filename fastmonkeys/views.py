@@ -29,20 +29,20 @@ def login():
         if monkey is not None:
             if monkey.check_password(request.form.get('password')):
                 login_user(monkey)
-                return redirect(url_for('register'))
+                return redirect(url_for('list'))
         flash('Invalid login/password!', category='error')
     form = LoginForm(request.form)
     return render_template('login.html', form=form)
 
 
-@app.route('/logout')
+@app.route('/logout/')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register/', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -166,4 +166,4 @@ def delete():
     db_session.delete(monkey)
     db_session.commit()
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('register'))

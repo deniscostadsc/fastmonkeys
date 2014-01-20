@@ -31,7 +31,7 @@ def test_login(client, start_database):
         'password': '123456'
     }
 
-    response = client.post('/register', data=data)
+    response = client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -63,7 +63,7 @@ def test_logout(client, start_database):
         'password': '123456'
     }
 
-    response = client.post('/register', data=data)
+    response = client.post('/register/', data=data)
     assert not 'Set-Cookie' in response.headers
 
     data = {
@@ -74,17 +74,17 @@ def test_logout(client, start_database):
     response = client.post('/', data=data)
     assert 'Set-Cookie' in response.headers
 
-    response = client.get('/logout')
+    response = client.get('/logout/')
     assert response.status_code == 302
 
 
 def test_fail_logout(client, start_database):
-    response = client.get('/logout')
+    response = client.get('/logout/')
     assert response.status_code == 401
 
 
 def test_register_status_code(client):
-    response = client.get('/register')
+    response = client.get('/register/')
     assert response.status_code == 200
 
 
@@ -98,7 +98,7 @@ def test_register(client, start_database):
 
     assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 0
 
-    response = client.post('/register', data=data)
+    response = client.post('/register/', data=data)
     assert response.status_code == 302
     assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 1
 
@@ -111,7 +111,7 @@ def test_view_profile(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -131,7 +131,7 @@ def test_fail_view_profile(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -151,7 +151,7 @@ def test_edit_profile_status_code(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -172,7 +172,7 @@ def test_edit_email_profile(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -200,7 +200,7 @@ def test_edit_password_profile(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -240,7 +240,7 @@ def test_delete_monkey(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
     assert Monkey.query.filter(Monkey.email == 'lemmy@mail.com').count() == 1
 
     data = {
@@ -263,7 +263,7 @@ def test_list_monkeys(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -289,7 +289,7 @@ def test_fail_list_monkeys_bad_query_string(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -310,7 +310,7 @@ def test_list_monkeys_invalid_number(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -331,7 +331,7 @@ def test_add_monkey_as_friend(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'name': 'Tom Araya',
@@ -340,7 +340,7 @@ def test_add_monkey_as_friend(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
@@ -364,7 +364,7 @@ def test_unfriend(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'name': 'Tom Araya',
@@ -373,7 +373,7 @@ def test_unfriend(client, start_database):
         'password': '123456'
     }
 
-    client.post('/register', data=data)
+    client.post('/register/', data=data)
 
     data = {
         'email': 'lemmy@mail.com',
