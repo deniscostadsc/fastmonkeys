@@ -71,6 +71,16 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% if has_previous %}
+            <a href="/monkeys/?page={{ previous_page }}" class="btn btn-primary">
+                <
+            </a>
+        {% endif %}
+        {% if has_next %}
+            <a href="/monkeys/?page={{ next_page }}" class="btn btn-primary">
+                >
+            </a>
+        {% endif %}
     </div>
 {% endblock content %}
 

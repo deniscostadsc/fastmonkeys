@@ -23,5 +23,4 @@ TODO
 
 [X] List of monkeys should be sortable by name, name of the best friend and number of friends
 
-[ ] List of monkeys should have pagination
-
+[X] List of monkeys should have pagination

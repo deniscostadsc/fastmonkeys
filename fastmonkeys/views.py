@@ -1,4 +1,5 @@
 from datetime import datetime
+from math import ceil
 
 from flask import abort, render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -7,6 +8,8 @@ from fastmonkeys import app
 from fastmonkeys.forms import RegisterForm, LoginForm, EditProfileForm
 from fastmonkeys.models import Monkey
 from fastmonkeys.database import db_session
+
+per_page = 10
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -56,8 +59,32 @@ def profile(monkey_id):
 @app.route('/monkeys/')
 @login_required
 def list():
-    monkeys = Monkey.query.all()
-    return render_template('list.html', monkeys=monkeys)
+    try:
+        page = int(request.args.get('page', 1))
+    except ValueError:
+        page = 1
+
+    monkeys = Monkey.query.limit(per_page).offset((page - 1) * per_page).all()
+    if not monkeys and page != 1:
+        abort(404)
+
+    total = len(Monkey.query.all())
+
+    pages = int(ceil(total / float(per_page)))
+
+    has_next = pages > page
+    previous_page = page - 1
+    has_previous = page > 1
+    next_page = page + 1
+
+    return render_template(
+        'list.html',
+        monkeys=monkeys,
+        has_previous=has_previous,
+        has_next=has_next,
+        next_page=next_page,
+        previous_page=previous_page
+    )
 
 
 @app.route('/friend/<monkey_id>/')

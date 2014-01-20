@@ -281,6 +281,48 @@ def test_list_monkeys(client, start_database):
         assert 'Lemmy Kilmister' in response.data
 
 
+def test_fail_list_monkeys_bad_query_string(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+
+    response = client.get('/monkeys/?page=a')
+    assert response.status_code == 200
+
+
+def test_list_monkeys_invalid_number(client, start_database):
+    data = {
+        'name': 'Lemmy Kilmister',
+        'email': 'lemmy@mail.com',
+        'date_of_birth': '09/12/1954',
+        'password': '123456'
+    }
+
+    client.post('/register', data=data)
+
+    data = {
+        'email': 'lemmy@mail.com',
+        'password': '123456'
+    }
+
+    client.post('/', data=data)
+
+    response = client.get('/monkeys/?page=123456')
+    assert response.status_code == 404
+
+
 def test_add_monkey_as_friend(client, start_database):
     data = {
         'name': 'Lemmy Kilmister',
