@@ -12,6 +12,16 @@ from fastmonkeys.database import db_session
 per_page = 10
 
 
+@app.errorhandler(404)
+def _404(error):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(401)
+def _401(error):
+    return render_template('401.html'), 401
+
+
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST' and 'email' in request.form:
