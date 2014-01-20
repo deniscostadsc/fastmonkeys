@@ -1,6 +1,5 @@
 from datetime import datetime
 from math import ceil
-import logging
 
 from flask import abort, flash, render_template, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
@@ -26,16 +25,11 @@ def _401(error):
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST' and 'email' in request.form:
-        logging.info('It\'s POST')
         monkey = Monkey.query.filter(Monkey.email == request.form.get('email')).first()
-        logging.info('I tried to get a monkey.')
         if monkey is not None:
-            logging.info('I got a monkey called "%s"' % monkey.name)
             if monkey.check_password(request.form.get('password')):
-                logging.info('His password is OK.')
                 login_user(monkey)
                 return redirect(url_for('list'))
-            logging.info('His password is wrong.')
         flash('Invalid login/password!', category='error')
     form = LoginForm(request.form)
     return render_template('login.html', form=form)
