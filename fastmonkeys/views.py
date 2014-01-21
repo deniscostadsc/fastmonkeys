@@ -107,10 +107,11 @@ def list():
 @login_required
 def friend(monkey_id):
     monkey = current_user
-    friend = Monkey.query.get(monkey_id)
-    monkey.friends.append(friend)
-    db_session.add(monkey)
-    db_session.commit()
+    if monkey.get_id() != monkey_id:
+        friend = Monkey.query.get(monkey_id)
+        monkey.friends.append(friend)
+        db_session.add(monkey)
+        db_session.commit()
     return redirect(url_for('list'))
 
 
@@ -119,9 +120,10 @@ def friend(monkey_id):
 def unfriend(monkey_id):
     monkey = current_user
     friend = Monkey.query.get(monkey_id)
-    monkey.friends.remove(friend)
-    db_session.add(monkey)
-    db_session.commit()
+    if friend in monkey.friends:
+        monkey.friends.remove(friend)
+        db_session.add(monkey)
+        db_session.commit()
     return redirect(url_for('list'))
 
 
