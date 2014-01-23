@@ -38,10 +38,7 @@ def test_login(client, start_database):
         'password': '123456'
     }
 
-    assert not 'Set-Cookie' in response.headers
-
     response = client.post('/', data=data)
-    assert 'Set-Cookie' in response.headers
     assert response.status_code == 302
 
 
@@ -64,7 +61,6 @@ def test_logout(client, start_database):
     }
 
     response = client.post('/register/', data=data)
-    assert not 'Set-Cookie' in response.headers
 
     data = {
         'email': 'lemmy@mail.com',
