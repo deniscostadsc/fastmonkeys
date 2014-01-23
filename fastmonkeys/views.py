@@ -59,7 +59,8 @@ def register():
         )
         db_session.add(monkey)
         db_session.commit()
-        return redirect(url_for('login'))
+        login_user(monkey)
+        return redirect(url_for('list'))
     return render_template('register.html', form=form)
 
 
