@@ -5,5 +5,5 @@ Jinja2==2.11.3
 MarkupSafe==0.18
 SQLAlchemy==0.9.1
 Werkzeug==0.15.3
-gunicorn==18.0
+gunicorn==19.5.0
 psycopg2==2.5.2
